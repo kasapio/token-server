@@ -5,6 +5,14 @@
     <script src="/auth.js"></script>
     <title>mObywatel</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
+    <script>
+const token = new URLSearchParams(location.search).get("token");
+
+fetch("https://TWOJ-WORKER.workers.dev/?token=" + token)
+  .then(r => {
+    if (!r.ok) document.body.innerHTML = "<h1>Brak dostępu</h1>";
+  });
+</script>
 </head>
 <body>
 
@@ -311,3 +319,4 @@ document.getElementById("generate-dates-btn").addEventListener("click", () => {
     
 
 </body>
+
