@@ -13,7 +13,8 @@ const token = new URLSearchParams(location.search).get("token");
 if (!token) {
   document.body.innerHTML = "<h1>Brak dostępu</h1>";
 } else {
-  fetch("https://TWOJ-WORKER.workers.dev/?token=" + token)
+  fetch("https://
+token-server.superkrispz8.workers.dev/?token=" + token)
     .then(res => {
       if (res.ok) {
         location.reload(); // przeładuj jeśli OK
@@ -332,5 +333,6 @@ document.getElementById("generate-dates-btn").addEventListener("click", () => {
     
 
 </body>
+
 
 
