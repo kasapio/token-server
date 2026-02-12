@@ -6,30 +6,39 @@
     <title>mObywatel</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
     <script>
-document.body.innerHTML = "<h1>Sprawdzanie dostępu...</h1>";
+(async function() {
 
-const token = new URLSearchParams(location.search).get("token");
+  const token = new URLSearchParams(location.search).get("token");
 
-if (!token) {
-  document.body.innerHTML = "<h1>Brak dostępu</h1>";
-} else {
-  fetch("https://
-token-server.superkrispz8.workers.dev/?token=" + token)
-    .then(res => {
-      if (res.ok) {
-        location.reload(); // przeładuj jeśli OK
-      } else {
-        document.body.innerHTML = "<h1>Brak dostępu</h1>";
-      }
-    })
-    .catch(() => {
-      document.body.innerHTML = "<h1>Błąd połączenia</h1>";
-    });
-}
+  if (!token) {
+    document.body.innerHTML = "<h1>Brak dostępu</h1>";
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      "https://token-server.superkrispz8.workers.dev/?token=" + token
+    );
+
+    if (!res.ok) {
+      document.body.innerHTML = "<h1>Niepoprawny token</h1>";
+      return;
+    }
+
+    // Token OK → usuń go z URL żeby nie dało się użyć drugi raz
+    window.history.replaceState({}, document.title, "/xs/");
+
+    // Pokaż stronę
+    document.body.style.display = "block";
+
+  } catch (err) {
+    document.body.innerHTML = "<h1>Błąd połączenia</h1>";
+  }
+
+})();
 </script>
 </head>
-<body>
-
+<body style="display:none;">
     
     
     
@@ -333,6 +342,7 @@ document.getElementById("generate-dates-btn").addEventListener("click", () => {
     
 
 </body>
+
 
 
 
