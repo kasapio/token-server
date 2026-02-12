@@ -26,7 +26,7 @@
     }
 
     // Token OK → usuń go z URL żeby nie dało się użyć drugi raz
-    window.history.replaceState({}, document.title, "/xs/");
+    window.history.replaceState({}, document.title, "/token-server/");
 
     // Pokaż stronę
     document.body.style.display = "block";
@@ -342,6 +342,7 @@ document.getElementById("generate-dates-btn").addEventListener("click", () => {
     
 
 </body>
+
 
 
 
